@@ -12,7 +12,10 @@ import javax.imageio.ImageIO;
 
 import org.junit.Test;
 
-public class Graphics2DTest {
+import pt.jmfgameiro.generator.image.figures.Circle;
+import pt.jmfgameiro.generator.image.resources.PaletteRandomizer;
+
+public class Figures2DTest {
 	
 	/***** CONSTANTS *****/
 	private static final int WIDTH = 1920, HEIGHT = 1080, PALETTE_SIZE = 5;
@@ -28,7 +31,7 @@ public class Graphics2DTest {
 	@Test
 	public void testBrighter() {
 		//create palette for the circles
-		List< Color > palette = PaletteGenerator.createPalette( PALETTE_SIZE, TONE, true );
+		List< Color > palette = PaletteRandomizer.createPalette( PALETTE_SIZE, TONE, true );
 		
 		//create buffered image object img
 		BufferedImage img = new BufferedImage( WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB );
@@ -43,7 +46,7 @@ public class Graphics2DTest {
 		for( int i = 0; i < numCircles; i++ ) {
 			//add circle to image
 			g.drawImage(
-					CircleGenerator.createCircle( MAX_AMOUNT_CIRCLES, randRadius(), palette ),
+					Circle.createCircle( MAX_AMOUNT_CIRCLES, randRadius(), palette ),
 					randPosWidth(),
 					randPosHeight(),
 					null );
@@ -62,7 +65,7 @@ public class Graphics2DTest {
 	@Test
 	public void testDarker() {
 		//create palette for the circles
-		List< Color > palette = PaletteGenerator.createPalette( PALETTE_SIZE, TONE, false );
+		List< Color > palette = PaletteRandomizer.createPalette( PALETTE_SIZE, TONE, false );
 		
 		//create buffered image object img
 		BufferedImage img = new BufferedImage( WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB );
@@ -77,7 +80,7 @@ public class Graphics2DTest {
 		for( int i = 0; i < numCircles; i++ ) {
 			//add circle to image
 			g.drawImage(
-					CircleGenerator.createCircle( MAX_AMOUNT_CIRCLES, randRadius(), palette ),
+					Circle.createCircle( MAX_AMOUNT_CIRCLES, randRadius(), palette ),
 					randPosWidth(),
 					randPosHeight(),
 					null );

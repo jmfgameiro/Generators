@@ -1,4 +1,4 @@
-package pt.jmfgameiro.generator.image;
+package pt.jmfgameiro.generator.image.figures;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.Random;
 
-public final class CircleGenerator {
+public final class Circle {
 	
 	
 	/***** PUBLIC *****/
@@ -17,7 +17,7 @@ public final class CircleGenerator {
 	 * @param tone Color of the circle
 	 * @return Image with a circle
 	 */
-	public static BufferedImage createCircle( int radius, Color tone ) {
+	public static final BufferedImage createCircle( int radius, Color tone ) {
 		//calculate circle diameter
 		int diameter = radius * 2;
 		
@@ -39,7 +39,7 @@ public final class CircleGenerator {
 	 * @param palette Palette of colors in the circle
 	 * @return Image with a circle
 	 */
-	public static BufferedImage createCircle( int amount, int maxRadius, List< Color > palette ) {
+	public static final BufferedImage createCircle( int amount, int maxRadius, List< Color > palette ) {
 		//calculate circle diameter
 		int diameter = maxRadius * 2;
 		

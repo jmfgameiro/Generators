@@ -1,10 +1,10 @@
-package pt.jmfgameiro.generator.image;
+package pt.jmfgameiro.generator.image.resources;
 
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class PaletteGenerator {
+public final class PaletteRandomizer {
 	
 	
 	/***** PUBLIC *****/
@@ -13,7 +13,7 @@ public final class PaletteGenerator {
 	 * @param amount Number of colors in the palette
 	 * @return Colors in the palette
 	 */
-	public static List< Color > createPalette( int amount ) {
+	public static final List< Color > createPalette( int amount ) {
 		List< Color > pallete = new ArrayList< Color >();
 		for( int i = 0; i < amount; i++ )
 			pallete.add( ColorRandomizer.random() );
@@ -29,7 +29,7 @@ public final class PaletteGenerator {
 	 * <code>false</code> if the palette is darker than the tone
 	 * @return Colors in the palette
 	 */
-	public static List< Color > createPalette( int amount, Color tone, Boolean type ) {
+	public static final List< Color > createPalette( int amount, Color tone, Boolean type ) {
 		if( type == null )
 			return createPaletteArround( amount, tone );
 		else if( type )
@@ -45,7 +45,7 @@ public final class PaletteGenerator {
 	 * @param tone Base color for the palette
 	 * @return Colors in the palette
 	 */
-	private static List< Color > createPaletteArround( int amount, Color tone ) {
+	private static final List< Color > createPaletteArround( int amount, Color tone ) {
 		throw new UnsupportedOperationException(); //TODO
 	}
 	/**
@@ -54,7 +54,7 @@ public final class PaletteGenerator {
 	 * @param tone Base color for the palette
 	 * @return Colors in the palette
 	 */
-	private static List< Color > createPaletteBrighter( int amount, Color tone ) {
+	private static final List< Color > createPaletteBrighter( int amount, Color tone ) {
 		List< Color > pallete = new ArrayList< Color >();
 		pallete.add( tone );
 		
@@ -79,7 +79,7 @@ public final class PaletteGenerator {
 	 * @param tone Base color for the palette
 	 * @return Colors in the palette
 	 */
-	private static List< Color > createPaletteDarker( int amount, Color tone ) {
+	private static final List< Color > createPaletteDarker( int amount, Color tone ) {
 		List< Color > pallete = new ArrayList< Color >();
 		pallete.add( tone );
 		
