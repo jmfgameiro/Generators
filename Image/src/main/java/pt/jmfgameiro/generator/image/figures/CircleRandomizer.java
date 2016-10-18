@@ -5,9 +5,10 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.util.List;
-import java.util.Random;
 
-public final class Circle {
+import pt.jmfgameiro.generator.number.IntegerRandomizer;
+
+public final class CircleRandomizer implements Figure {
 	
 	
 	/***** PUBLIC *****/
@@ -17,7 +18,7 @@ public final class Circle {
 	 * @param tone Color of the circle
 	 * @return Image with a circle
 	 */
-	public static final BufferedImage createCircle( int radius, Color tone ) {
+	public static final BufferedImage create( int radius, Color tone ) {
 		//calculate circle diameter
 		int diameter = radius * 2;
 		
@@ -39,7 +40,11 @@ public final class Circle {
 	 * @param palette Palette of colors in the circle
 	 * @return Image with a circle
 	 */
-	public static final BufferedImage createCircle( int amount, int maxRadius, List< Color > palette ) {
+	public static final BufferedImage create( int amount, int maxRadius, List< Color > palette ) {
+		//validate the amount of
+		if( amount == 1 )
+			return create( maxRadius, palette.get( IntegerRandomizer.random( palette.size() ) ) );
+			
 		//calculate circle diameter
 		int diameter = maxRadius * 2;
 		
@@ -53,16 +58,18 @@ public final class Circle {
 		Graphics2D c = circle.createGraphics();
 		
 		//iterate the multiple circles from bigger to smaller
-		Random rand = new Random();
 		int lastColor = 0;
 		for( int i = 0; i < amount; i++ ) {
+			//
 			int index = 0;
 			while( index == lastColor )
-				index = rand.nextInt( amount );
-			lastColor = index;
+				index = IntegerRandomizer.random( palette.size() );
+			//
 			int position = i * radiusDifference;
-			BufferedImage newCircle = createCircle( maxRadius - position, palette.get( index ) );
+			BufferedImage newCircle = create( maxRadius - position, palette.get( index ) );
 			c.drawImage( newCircle, position, position, null );
+			//
+			lastColor = index;
 		}
 		
 		//

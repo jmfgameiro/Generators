@@ -23,7 +23,8 @@ repositories {
 
 //
 dependencies {
-    testCompile group: 'junit',						name: 'junit',		version: '4.+'
+	compile		group: 'pt.jmfgameiro.generator.number',	name: 'Numeric',	version: '1.0.0.Final'
+    testCompile group: 'junit',								name: 'junit',		version: '4.+'
 }
 
 //

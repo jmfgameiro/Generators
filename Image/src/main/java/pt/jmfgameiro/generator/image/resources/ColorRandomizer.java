@@ -1,9 +1,13 @@
 package pt.jmfgameiro.generator.image.resources;
 
 import java.awt.Color;
-import java.util.Random;
+
+import pt.jmfgameiro.generator.number.IntegerRandomizer;
 
 public final class ColorRandomizer {
+	
+	/***** CONSTANTS *****/
+	public static final int MAX_COLOR_VALUE = 256, MIN_COLOR_VALUE = 0, STANDARD_DIFFERENCE = 0;
 	
 	
 	/***** PUBLIC *****/
@@ -11,61 +15,61 @@ public final class ColorRandomizer {
 		return new Color(
 				color.getRed(),
 				color.getGreen(),
-				randomValue(),
+				IntegerRandomizer.random( MAX_COLOR_VALUE ),
 				color.getAlpha() );
 	}
 	public static final Color randomBlueBrighter( Color color ) {
 		return new Color(
 				color.getRed(),
 				color.getGreen(),
-				randomValueBrighter( color.getBlue(), -1 ),
+				randomValueBrighter( color.getBlue(), STANDARD_DIFFERENCE ),
 				color.getAlpha() );
 	}
 	public static final Color randomBlueDarker( Color color ) {
 		return new Color(
 				color.getRed(),
 				color.getGreen(),
-				randomValueDarker( color.getBlue(), -1 ),
+				randomValueDarker( color.getBlue(), STANDARD_DIFFERENCE ),
 				color.getAlpha() );
 	}
 	public static final Color randomGreen( Color color ) {
 		return new Color(
 				color.getRed(),
-				randomValue(),
+				IntegerRandomizer.random( MAX_COLOR_VALUE ),
 				color.getBlue(),
 				color.getAlpha() );
 	}
 	public static final Color randomGreenBrighter( Color color ) {
 		return new Color(
 				color.getRed(),
-				randomValueBrighter( color.getGreen(), -1 ),
+				randomValueBrighter( color.getGreen(), STANDARD_DIFFERENCE ),
 				color.getBlue(),
 				color.getAlpha() );
 	}
 	public static final Color randomGreenDarker( Color color ) {
 		return new Color(
 				color.getRed(),
-				randomValueDarker( color.getGreen(), -1 ),
+				randomValueDarker( color.getGreen(), STANDARD_DIFFERENCE ),
 				color.getBlue(),
 				color.getAlpha() );
 	}
 	public static final Color randomRed( Color color ) {
 		return new Color(
-				randomValue(),
+				IntegerRandomizer.random( MAX_COLOR_VALUE ),
 				color.getGreen(),
 				color.getBlue(),
 				color.getAlpha() );
 	}
 	public static final Color randomRedBrighter( Color color ) {
 		return new Color(
-				randomValueBrighter( color.getRed(), -1 ),
+				randomValueBrighter( color.getRed(), STANDARD_DIFFERENCE ),
 				color.getGreen(),
 				color.getBlue(),
 				color.getAlpha() );
 	}
 	public static final Color randomRedDarker( Color color ) {
 		return new Color(
-				randomValueDarker( color.getRed(), -1 ),
+				randomValueDarker( color.getRed(), STANDARD_DIFFERENCE ),
 				color.getGreen(),
 				color.getBlue(),
 				color.getAlpha() );
@@ -73,9 +77,9 @@ public final class ColorRandomizer {
 	
 	public static final Color random() {
 		return new Color(
-				randomValue(),
-				randomValue(),
-				randomValue() );
+				IntegerRandomizer.random( MAX_COLOR_VALUE ),
+				IntegerRandomizer.random( MAX_COLOR_VALUE ),
+				IntegerRandomizer.random( MAX_COLOR_VALUE ) );
 	}
 	public static final Color randomBrighter( Color color, int difference ) {
 		return new Color(
@@ -94,35 +98,26 @@ public final class ColorRandomizer {
 	
 	
 	/***** PRIVATE *****/
-	private static final int randomValue() {
-		Random rand = new Random();
-		return rand.nextInt( 256 );
+	private static final int randomValueDarker( int current, int difference ) {
+		//
+		if( difference <= STANDARD_DIFFERENCE )
+			difference = current;
+		//
+		int value = IntegerRandomizer.random( current - difference, current );
+		//System.out.println( "[ " + current + ", " + difference + ", " + value + " ]" );
+		if( value <= MIN_COLOR_VALUE )
+			value = MIN_COLOR_VALUE;
+		return value;
 	}
-	private static final int randomValueDarker( int max, int difference ) {
-		if( max <= 0 )
-			return 0;
+	private static final int randomValueBrighter( int current, int difference ) {
 		//
-		if( difference == 0 )
-			return max;
+		if( difference <= STANDARD_DIFFERENCE )
+			difference = MAX_COLOR_VALUE - current;
 		//
-		Random rand = new Random();
-		if( difference < 0 )
-			return rand.nextInt( 256 );
-		//
-		return rand.nextInt( max );
-	}
-	private static final int randomValueBrighter( int min, int difference ) {
-		//
-		if( difference == 0 )
-			return min;
-		//
-		Random rand = new Random();
-		if( difference < 0 )
-			return rand.nextInt( 256 - min ) + min;
-		//
-		int value = rand.nextInt( difference ) + min;
-		if( value > 255 )
-			value = 255;
+		int value = IntegerRandomizer.random( current, current + difference);
+		//System.out.println( "[ " + current + ", " + difference + ", " + value + " ]" );
+		if( value >= MAX_COLOR_VALUE )
+			value = MAX_COLOR_VALUE - 1;
 		return value;
 	}
 	

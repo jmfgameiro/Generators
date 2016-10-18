@@ -46,6 +46,7 @@ public final class PaletteRandomizer {
 	 * @return Colors in the palette
 	 */
 	private static final List< Color > createPaletteArround( int amount, Color tone ) {
+		System.out.println( "=> CREATE PALETTE ARROUND!" );
 		throw new UnsupportedOperationException(); //TODO
 	}
 	/**
@@ -55,20 +56,16 @@ public final class PaletteRandomizer {
 	 * @return Colors in the palette
 	 */
 	private static final List< Color > createPaletteBrighter( int amount, Color tone ) {
+		int difference = ( ColorRandomizer.MAX_COLOR_VALUE - minColor( tone ) ) / amount;
+		//System.out.println( "=> CREATE PALETTE BRIGHTER (" + difference + ")" );
+		
 		List< Color > pallete = new ArrayList< Color >();
+		//System.out.println( "COLOR: ( " + tone.getRed() + ", " + tone.getGreen() + ", " + tone.getBlue() + " )" );
 		pallete.add( tone );
-		
-		int minRGB = tone.getRed();
-		if( tone.getGreen() < minRGB )
-			minRGB = tone.getGreen();
-		if( tone.getBlue() < minRGB )
-			minRGB = tone.getBlue();
-		int difference = ( 256 - minRGB ) * 2 / amount;
-		
-		System.out.println( "DIFFERENCE: " + difference );
 		
 		for( int i = 1; i < amount; i++ ) {
 			tone = ColorRandomizer.randomBrighter( tone, difference );
+			//System.out.println( "COLOR: ( " + tone.getRed() + ", " + tone.getGreen() + ", " + tone.getBlue() + " )" );
 			pallete.add( tone );
 		}
 		return pallete;
@@ -80,21 +77,27 @@ public final class PaletteRandomizer {
 	 * @return Colors in the palette
 	 */
 	private static final List< Color > createPaletteDarker( int amount, Color tone ) {
+		int difference = minColor( tone ) / amount;
+		//System.out.println( "=> CREATE PALETTE DARKER (" + difference + ")" );
+		
 		List< Color > pallete = new ArrayList< Color >();
+		//System.out.println( "COLOR: ( " + tone.getRed() + ", " + tone.getGreen() + ", " + tone.getBlue() + " )" );
 		pallete.add( tone );
 		
+		for( int i = 1; i < amount; i++ ) {
+			tone = ColorRandomizer.randomDarker( tone, difference );
+			//System.out.println( "COLOR: ( " + tone.getRed() + ", " + tone.getGreen() + ", " + tone.getBlue() + " )" );
+			pallete.add( tone );
+		}
+		return pallete;
+	}
+	private static final int minColor( Color tone ) {
 		int minRGB = tone.getRed();
 		if( tone.getGreen() < minRGB )
 			minRGB = tone.getGreen();
 		if( tone.getBlue() < minRGB )
 			minRGB = tone.getBlue();
-		int difference = minRGB / amount;
-		
-		for( int i = 1; i < amount; i++ ) {
-			tone = ColorRandomizer.randomDarker( tone, difference );
-			pallete.add( tone );
-		}
-		return pallete;
+		return minRGB * 2;
 	}
 	
 	
