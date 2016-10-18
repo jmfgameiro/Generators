@@ -29,8 +29,6 @@ public class Graphics2DTest {
 	public void testBrighter() {
 		//create palette for the circles
 		List< Color > palette = PaletteGenerator.createPalette( PALETTE_SIZE, TONE, true );
-		for( Color color : palette )
-			System.out.println( "COLOR: " + color.getRed() + "|" + color.getGreen() + "|" + color.getBlue() );
 		
 		//create buffered image object img
 		BufferedImage img = new BufferedImage( WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB );
@@ -65,8 +63,6 @@ public class Graphics2DTest {
 	public void testDarker() {
 		//create palette for the circles
 		List< Color > palette = PaletteGenerator.createPalette( PALETTE_SIZE, TONE, false );
-		for( Color color : palette )
-			System.out.println( "COLOR: " + color.getRed() + "|" + color.getGreen() + "|" + color.getBlue() );
 		
 		//create buffered image object img
 		BufferedImage img = new BufferedImage( WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB );
