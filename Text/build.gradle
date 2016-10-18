@@ -1,0 +1,46 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'maven'
+
+//
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+version = '1.0.0.Final'
+group = 'pt.jmfgameiro.generator.text'
+
+//
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Text Generator Example', 'Implementation-Version': version
+    }
+}
+
+//
+repositories {
+	mavenLocal()
+    mavenCentral()
+}
+
+//
+dependencies {
+    testCompile group: 'junit',						name: 'junit',		version: '4.+'
+}
+
+//
+task sourcesJar( type: Jar, dependsOn: classes ) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+artifacts {
+    archives sourcesJar
+}
+
+//
+uploadArchives {
+	repositories {
+		mavenDeployer {
+			repository( url: "file://localhost/tmp/myRepo/" )
+		}
+	}
+}
+
