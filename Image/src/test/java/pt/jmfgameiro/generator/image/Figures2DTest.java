@@ -19,11 +19,11 @@ public class Figures2DTest {
 	
 	/***** CONSTANTS *****/
 	private static final int WIDTH = 1920, HEIGHT = 1080, PALETTE_SIZE = 5;
-	private static final Color TONE = new Color( 100, 100, 245 );
+	private static final Color TONE = new Color( 161, 178, 31 );
 	private static final int MIN_RADIUS = 20, MAX_RADIUS = 150;
 	private static final int MIN_CIRCLES = 15, MAX_CIRCLES = 25;
 	private static final int MIN_INNER_CIRCLES = 1, MAX_INNER_CIRCLES = 5;
-	private static final String IMAGE_PATH = "C:\\_PERSONAL\\_WORKSPACES\\_IMAGES\\outputGraphics";
+	private static final String IMAGE_PATH = System.getProperty("user.dir") + "\\outputGraphics";
 	private static final String IMAGE_EXTENSION = "png";
 	
 	
